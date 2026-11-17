@@ -18,3 +18,7 @@ __pycache__
 .DS_Store
 .claude/settings.local.json
 .claude/worktrees/
+
+# Windows installer build output
+/installer/stage/
+/installer/tmp/

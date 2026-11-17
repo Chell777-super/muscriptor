@@ -1,0 +1,40 @@
+name: Windows installer
+
+on:
+  release:
+    types: [created]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install uv
+      uses: astral-sh/setup-uv@v7
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 22
+    - name: Build frontend into muscriptor/web_dist
+      run: |
+        corepack enable
+        pnpm install --frozen-lockfile
+        pnpm run build
+      working-directory: web
+    - name: Build installer
+      shell: pwsh
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      run: ./installer/build.ps1
+    - uses: actions/upload-artifact@v4
+      with:
+        name: MuScriptor-windows-installer
+        path: dist/*-setup-x64.exe
+    - name: Attach to the release
+      if: github.event_name == 'release'
+      shell: pwsh
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: gh release upload "${{ github.event.release.tag_name }}" (Get-ChildItem dist/*-setup-x64.exe).FullName --clobber

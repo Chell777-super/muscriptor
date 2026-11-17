@@ -59,6 +59,16 @@ On Windows the default PyTorch backend is `cpu`, so the GPU needs
 after torch 2.2.2, which supports Python ≤ 3.12, so the Python version has to
 be pinned (if you install with pip/uv instead, use Python 3.10–3.12).
 
+### Windows installer
+
+Windows users can instead download `MuScriptor-<version>-setup-x64.exe` from the
+[releases page](https://github.com/muscriptor/muscriptor/releases). It installs per-user
+(no admin rights) and, like the Docker image, ships everything prebuilt: the web UI, MuseScore and
+fluidsynth. At install time it downloads Python, the locked dependencies (PyTorch with CUDA if an
+NVIDIA driver is found, CPU otherwise) and the soundfonts. Start "MuScriptor" from the Start menu;
+the first launch asks for your HuggingFace token. The installer is built by
+`installer/build.ps1` (see the `Windows installer` workflow).
+
 ## Web UI
 
 You can host the web UI locally with:
