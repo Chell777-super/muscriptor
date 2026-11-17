@@ -55,7 +55,9 @@ Some platforms need an extra `uvx` flag, on every `uvx muscriptor` command:
 | macOS with Intel | `uvx --python 3.12 muscriptor serve` |
 
 On Windows the default PyTorch backend is `cpu`, so the GPU needs
-`--torch-backend=cu128`. On Intel Macs, PyTorch stopped shipping x86_64 wheels
+`--torch-backend=cu128`. To run from a clone of this repository instead, with a
+CUDA venv, the web UI, FluidSynth and MuseScore set up for you, run
+[`windows\install.bat`](windows/README.md). On Intel Macs, PyTorch stopped shipping x86_64 wheels
 after torch 2.2.2, which supports Python ≤ 3.12, so the Python version has to
 be pinned (if you install with pip/uv instead, use Python 3.10–3.12).
 

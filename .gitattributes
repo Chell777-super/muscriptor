@@ -1,0 +1,4 @@
+# Windows batch files must keep CRLF line endings (labels/goto break with LF),
+# also in GitHub ZIP downloads, so they are stored as-is.
+*.bat -text
+*.cmd -text
